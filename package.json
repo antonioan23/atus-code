@@ -1,19 +1,10 @@
 {
   "name": "@antonion23/atus-code",
-  "version": "0.17.4",
+  "version": "0.17.5",
   "engines": {
     "node": ">=22.0.0"
   },
   "type": "module",
-  "workspaces": [
-    "packages/*",
-    "packages/channels/base",
-    "packages/channels/telegram",
-    "packages/channels/weixin",
-    "packages/channels/dingtalk",
-    "packages/channels/feishu",
-    "packages/channels/plugin-example"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/antonioan23/atus-code.git"
