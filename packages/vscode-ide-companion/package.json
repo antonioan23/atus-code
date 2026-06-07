@@ -1,0 +1,325 @@
+{
+  "name": "atus-code-vscode-ide-companion",
+  "displayName": "Atus Code Companion",
+  "description": "Enable Atus Code with direct access to your VS Code workspace.",
+  "version": "0.17.1",
+  "publisher": "atuscode",
+  "icon": "assets/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atuscode/atus-code.git",
+    "directory": "packages/vscode-ide-companion"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "license": "LICENSE",
+  "preview": true,
+  "categories": [
+    "AI"
+  ],
+  "keywords": [
+    "atus-code",
+    "atus code",
+    "atus",
+    "atus code",
+    "cli",
+    "ide integration",
+    "ide companion"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onView:atus-code.chatView.sidebar",
+    "onView:atus-code.chatView.secondary",
+    "onCommand:atus-code.openChat",
+    "onCommand:atus-code.focusChat",
+    "onCommand:atus-code.newConversation",
+    "onCommand:atus-code.showLogs"
+  ],
+  "contributes": {
+    "jsonValidation": [
+      {
+        "fileMatch": "**/.atus-code/settings.json",
+        "url": "./schemas/settings.schema.json"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "atus-code-sidebar",
+          "title": "Atus Code",
+          "icon": "assets/sidebar-icon.svg",
+          "when": "!atus-code:supportsSecondarySidebar"
+        }
+      ],
+      "secondarySidebar": [
+        {
+          "id": "atus-code-secondary",
+          "title": "Atus Code",
+          "icon": "assets/sidebar-icon.svg",
+          "when": "atus-code:supportsSecondarySidebar"
+        }
+      ]
+    },
+    "views": {
+      "atus-code-sidebar": [
+        {
+          "type": "webview",
+          "id": "atus-code.chatView.sidebar",
+          "name": "Atus Code",
+          "icon": "assets/sidebar-icon.svg",
+          "when": "!atus-code:supportsSecondarySidebar"
+        }
+      ],
+      "atus-code-secondary": [
+        {
+          "type": "webview",
+          "id": "atus-code.chatView.secondary",
+          "name": "Atus Code",
+          "icon": "assets/sidebar-icon.svg",
+          "when": "atus-code:supportsSecondarySidebar"
+        }
+      ]
+    },
+    "languages": [
+      {
+        "id": "atus-diff-editable"
+      }
+    ],
+    "commands": [
+      {
+        "command": "atus.diff.accept",
+        "title": "Atus Code: Accept Current Diff",
+        "icon": "$(check)"
+      },
+      {
+        "command": "atus.diff.cancel",
+        "title": "Atus Code: Close Diff Editor",
+        "icon": "$(close)"
+      },
+      {
+        "command": "atus-code.runAtusCode",
+        "title": "Atus Code: Run"
+      },
+      {
+        "command": "atus-code.showNotices",
+        "title": "Atus Code: View Third-Party Notices"
+      },
+      {
+        "command": "atus-code.openChat",
+        "title": "Atus Code: Open",
+        "icon": "./assets/icon.png"
+      },
+      {
+        "command": "atus-code.auth",
+        "title": "Atus Code: Auth"
+      },
+      {
+        "command": "atus-code.focusChat",
+        "title": "Atus Code: Focus Chat View"
+      },
+      {
+        "command": "atus-code.newConversation",
+        "title": "Atus Code: New Conversation"
+      },
+      {
+        "command": "atus-code.showLogs",
+        "title": "Atus Code: Show Logs"
+      },
+      {
+        "command": "atus-code.copyMessage",
+        "title": "%atus-code.copyMessage.title%"
+      },
+      {
+        "command": "atus-code.copyAllMessages",
+        "title": "%atus-code.copyAllMessages.title%"
+      },
+      {
+        "command": "atus-code.copyLastReply",
+        "title": "%atus-code.copyLastReply.title%"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "atus.diff.accept",
+          "when": "atus.diff.isVisible"
+        },
+        {
+          "command": "atus.diff.cancel",
+          "when": "atus.diff.isVisible"
+        },
+        {
+          "command": "atus-code.auth"
+        },
+        {
+          "command": "atus-code.copyMessage",
+          "when": "false"
+        },
+        {
+          "command": "atus-code.copyAllMessages",
+          "when": "false"
+        },
+        {
+          "command": "atus-code.copyLastReply",
+          "when": "false"
+        }
+      ],
+      "webview/context": [
+        {
+          "command": "atus-code.copyMessage",
+          "when": "webviewSection == 'chat-messages'",
+          "group": "9_cutcopypaste@1"
+        },
+        {
+          "command": "atus-code.copyAllMessages",
+          "when": "webviewSection == 'chat-messages'",
+          "group": "9_cutcopypaste@2"
+        },
+        {
+          "command": "atus-code.copyLastReply",
+          "when": "webviewSection == 'chat-messages'",
+          "group": "9_cutcopypaste@3"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "atus.diff.accept",
+          "when": "atus.diff.isVisible",
+          "group": "navigation"
+        },
+        {
+          "command": "atus.diff.cancel",
+          "when": "atus.diff.isVisible",
+          "group": "navigation"
+        },
+        {
+          "command": "atus-code.openChat",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Atus Code",
+      "properties": {
+        "atus-code.provider": {
+          "order": 0,
+          "type": "string",
+          "enum": [
+            "coding-plan",
+            "api-key"
+          ],
+          "enumDescriptions": [
+            "Alibaba Cloud Coding Plan — configurable from VS Code Settings",
+            "Configured via Atus Code: Auth or the onboarding button"
+          ],
+          "default": "coding-plan",
+          "markdownDescription": "**Coding Plan**: enter API Key + Region here to sync `~/.atus-code/settings.json`.\n\n**API Key**: use **Atus Code: Auth** or the onboarding button to configure ModelStudio or custom OpenAI-compatible providers."
+        },
+        "atus-code.apiKey": {
+          "order": 1,
+          "type": "string",
+          "default": "",
+          "markdownDescription": "API key used for **Coding Plan** settings sync. For **API Key** providers, configure the full provider details through **Atus Code: Auth**."
+        },
+        "atus-code.codingPlanRegion": {
+          "order": 2,
+          "type": "string",
+          "enum": [
+            "china",
+            "global"
+          ],
+          "enumDescriptions": [
+            "China — 阿里云百炼 (aliyun.com)",
+            "Global — Alibaba Cloud (alibabacloud.com)"
+          ],
+          "default": "china",
+          "markdownDescription": "Region for Coding Plan. _(Only used when Provider is `coding-plan`)_"
+        },
+        "atus-code.dotIndicator": {
+          "order": 3,
+          "type": "boolean",
+          "default": true,
+          "description": "Show a colored dot on the tab icon when a task completes (orange) or needs your attention (blue) while the tab is hidden."
+        },
+        "atus-code.notifications": {
+          "order": 4,
+          "type": "boolean",
+          "default": true,
+          "description": "Show notifications with sound when a task completes (at least 20 seconds) or needs your attention, while you are not actively viewing the Atus Code panel."
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "atus.diff.accept",
+        "key": "ctrl+s",
+        "when": "atus.diff.isVisible"
+      },
+      {
+        "command": "atus.diff.accept",
+        "key": "cmd+s",
+        "when": "atus.diff.isVisible"
+      },
+      {
+        "command": "atus-code.focusChat",
+        "key": "ctrl+shift+l",
+        "mac": "cmd+shift+l"
+      }
+    ]
+  },
+  "main": "./dist/extension.cjs",
+  "type": "module",
+  "scripts": {
+    "prepackage": "node ./scripts/prepackage.js",
+    "build": "npm run build:dev",
+    "build:dev": "npm run check-types && npm run lint && node esbuild.js",
+    "build:prod": "node esbuild.js --production",
+    "generate:notices": "node ./scripts/generate-notices.js",
+    "prepare": "npm run generate:notices",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "watch": "npm-run-all2 -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "vsce package --no-dependencies",
+    "test": "vitest run",
+    "test:ci": "vitest run --coverage",
+    "validate:notices": "node ./scripts/validate-notices.js"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
+    "@types/semver": "^7.7.1",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "autoprefixer": "^10.4.22",
+    "esbuild": "^0.25.3",
+    "eslint": "^9.25.1",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "npm-run-all2": "^8.0.2",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.18",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "@agentclientprotocol/sdk": "^0.14.1",
+    "@atus-code/sdk": "*",
+    "@atus-code/webui": "*",
+    "@modelcontextprotocol/sdk": "^1.25.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.1.0",
+    "express": "^5.1.0",
+    "markdown-it": "^14.1.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "semver": "^7.7.2",
+    "zod": "^3.25.76"
+  }
+}
