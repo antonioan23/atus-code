@@ -1,6 +1,6 @@
 {
-  "name": "@atus-code/atus-code",
-  "version": "0.17.1",
+  "name": "@antonion23/atus-code",
+  "version": "0.17.2",
   "engines": {
     "node": ">=22.0.0"
   },
@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/atuscode/atus-code.git"
+    "url": "git+https://github.com/antonioan23/atus-code.git"
   },
   "config": {
     "sandboxImageUri": "ghcr.io/atuscode/atus-code:0.17.1"
@@ -158,5 +158,10 @@
     "*.{json,md}": [
       "prettier --write"
     ]
+  },
+  "description": "Atus Code — open-source AI agent CLI (fork of Qwen Code, rebranded for the Atus ecosystem). OpenAI-compatible with Atus Proxy multi-provider support.",
+  "homepage": "https://github.com/antonioan23/atus-code",
+  "bugs": {
+    "url": "https://github.com/antonioan23/atus-code/issues"
   }
 }
