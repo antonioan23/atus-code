@@ -1,6 +1,6 @@
 {
   "name": "@antonion23/atus-code",
-  "version": "0.17.5",
+  "version": "0.17.6",
   "engines": {
     "node": ">=22.0.0"
   },
