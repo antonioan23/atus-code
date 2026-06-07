@@ -10,7 +10,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "atus": "dist/index.js"
+    "atus-code": "dist/index.js"
   },
   "exports": {
     ".": {

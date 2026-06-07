@@ -155,7 +155,7 @@ const distPackageJson = {
   type: 'module',
   main: 'cli.js',
   bin: {
-    atus: 'cli.js',
+    'atus-code': 'cli.js',
   },
   files: [
     'cli.js',
